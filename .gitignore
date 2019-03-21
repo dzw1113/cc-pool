@@ -24,11 +24,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Ignore everything in this directory
-*
 
 .gitignore
 .idea
-cc-pool.iml
-!/src/
-!/src/main/resources/
+/.gitignore
