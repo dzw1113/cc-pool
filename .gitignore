@@ -31,3 +31,4 @@ hs_err_pid*
 .idea
 cc-pool.iml
 !/src/
+!/src/main/resources/
