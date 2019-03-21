@@ -25,6 +25,5 @@
 hs_err_pid*
 
 .gitignore
-README.md
 .idea
 cc-pool.iml
