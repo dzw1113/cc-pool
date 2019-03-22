@@ -1,4 +1,4 @@
-package org.dzw.cc;
+package org.dzw.cc.worker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +91,7 @@ public class MessageWorker {
         String message = "消息";
         try {
 
-            MessageWorker.getInstance().add("11");
+            MessageWorker.getInstance().send("11");
 //            System.out.println(linkedBlockingQueue.poll());
 //            linkedBlockingQueue.put(1);
 //            System.out.println(linkedBlockingQueue.poll());

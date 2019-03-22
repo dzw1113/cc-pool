@@ -2,12 +2,20 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="cc-pool" />
-      </profile>
+      <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="annotationprocessor" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="annotation" options="-proc:none" />
+      <module name="annotationprocessor" options="-proc:none" />
+      <module name="assembly" options="-proc:none" />
+      <module name="cc-pool" options="-proc:none" />
+      <module name="processor" options="-proc:none" />
+      <module name="worker" options="-proc:none" />
+    </option>
   </component>
 </project>
