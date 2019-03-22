@@ -10,7 +10,11 @@ import java.lang.annotation.Target;
  * @author: dzw
  * @date: 2019/03/21 20:41
  **/
-@Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD})
+//@Retention(RetentionPolicy.SOURCE)
+//@Target({ElementType.METHOD})
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Sub {
+    int value();
+    String what();
 }

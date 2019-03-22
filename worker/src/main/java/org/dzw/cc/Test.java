@@ -24,21 +24,23 @@ public class Test {
 //                }
 //            });
 //        }
+        System.out.println(msg);
         System.out.println("是");
     }
 
-    @Sub
+    @Sub(value = 5, what = "This is a test")
+    public static String msg = "Hello world!";
+
     public void test() {
         System.out.println("2=====================");
     }
 
-    @Sub
     public void test1() {
         System.out.println("1=====================");
     }
 }
 
-class Consume implements Runnable{
+class Consume implements Runnable {
     public void run() {
 
     }

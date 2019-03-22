@@ -5,9 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.dzw.cc</groupId>
-    <artifactId>org.dzw.cc</artifactId>
+    <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
+
     <modules>
         <module>annotation</module>
         <module>processor</module>
@@ -18,23 +19,23 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <auto.service>1.0-rc4</auto.service>
     </properties>
 
     <build>
-        <finalName>ccpool</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
                 <configuration>
+                    <encoding>utf-8</encoding>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 
 
 </project>

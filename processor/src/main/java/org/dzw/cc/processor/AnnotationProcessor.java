@@ -17,7 +17,7 @@ import java.util.Set;
  **/
 //@SupportedAnnotationTypes("com.self.Store")
 //@AutoService(Processor.class)
-@SupportedAnnotationTypes("org.dzw.cc.Sub")
+@SupportedAnnotationTypes("org.dzw.cc.annotation.Sub")
 //@SupportedOptions(value = {"eventBusIndex", "verbose"})
 public class AnnotationProcessor extends AbstractProcessor {
 

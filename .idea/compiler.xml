@@ -3,6 +3,14 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="com.dzw.cc.assembly" />
+        <module name="org.dzw.cc.annotation" />
+        <module name="org.dzw.cc.worker" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="annotationprocessor" target="1.8" />
@@ -13,7 +21,11 @@
       <module name="annotation" options="-proc:none" />
       <module name="annotationprocessor" options="-proc:none" />
       <module name="assembly" options="-proc:none" />
-      <module name="cc-pool" options="-proc:none" />
+      <module name="cc-pool" options="" />
+      <module name="com.dzw.cc.assembly" options="" />
+      <module name="org.dzw.cc.annotation" options="" />
+      <module name="org.dzw.cc.processor" options="-proc:none" />
+      <module name="org.dzw.cc.worker" options="-Xlint:all" />
       <module name="processor" options="-proc:none" />
       <module name="worker" options="-proc:none" />
     </option>
