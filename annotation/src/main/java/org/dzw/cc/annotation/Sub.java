@@ -5,16 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * @description: 消费者
- * @author: dzw
- * @date: 2019/03/21 20:41
- **/
-//@Retention(RetentionPolicy.SOURCE)
-//@Target({ElementType.METHOD})
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Sub {
-    int value();
-    String what();
+    String key();
 }

@@ -7,9 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="annotation" />
+        <module name="assembly" />
         <module name="com.dzw.cc.assembly" />
         <module name="org.dzw.cc.annotation" />
         <module name="org.dzw.cc.worker" />
+        <module name="worker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -18,16 +21,16 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="annotation" options="-proc:none" />
+      <module name="annotation" options="" />
       <module name="annotationprocessor" options="-proc:none" />
-      <module name="assembly" options="-proc:none" />
+      <module name="assembly" options="" />
       <module name="cc-pool" options="" />
       <module name="com.dzw.cc.assembly" options="" />
       <module name="org.dzw.cc.annotation" options="" />
       <module name="org.dzw.cc.processor" options="-proc:none" />
       <module name="org.dzw.cc.worker" options="-Xlint:all" />
       <module name="processor" options="-proc:none" />
-      <module name="worker" options="-proc:none" />
+      <module name="worker" options="-Xlint:all" />
     </option>
   </component>
 </project>

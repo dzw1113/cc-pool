@@ -2,6 +2,8 @@ package org.dzw.cc;
 
 import org.dzw.cc.annotation.Sub;
 
+import java.util.Objects;
+
 /**
  * @description:
  * @author: dzw
@@ -10,8 +12,8 @@ import org.dzw.cc.annotation.Sub;
 public class Test {
     public static void main(String[] args) {
         Test test = new Test();
-        test.test();
-        test.test1();
+        test.test(1);
+        test.test1(2);
 //        AutoServiceProcessor asp = new AutoServiceProcessor();
 //        ExecutorService es = Executors.newFixedThreadPool(5);
 //        for (int i = 0; i < 5; i++) {
@@ -28,14 +30,16 @@ public class Test {
         System.out.println("是");
     }
 
-    @Sub(value = 5, what = "This is a test")
+
     public static String msg = "Hello world!";
 
-    public void test() {
+    @Sub(key = "11")
+    public void test(Object obj) {
         System.out.println("2=====================");
     }
 
-    public void test1() {
+    @Sub(key = "22")
+    public void test1(Object obj) {
         System.out.println("1=====================");
     }
 }
