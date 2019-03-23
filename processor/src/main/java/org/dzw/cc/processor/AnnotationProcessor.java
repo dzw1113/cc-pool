@@ -142,7 +142,7 @@ public class AnnotationProcessor extends AbstractProcessor {
             writer.write("    private static final Map<Class<?>, SubscriberInfo> SUBSCRIBER_INDEX;\n\n");
             writer.write("    static {\n");
             writer.write("        SUBSCRIBER_INDEX = new HashMap<Class<?>, SubscriberInfo>();\n\n");
-            writeIndexLines(writer, myPackage);
+//            writeIndexLines(writer, myPackage);
             writer.write("    }\n\n");
             writer.write("    private static void putIndex(SubscriberInfo info) {\n");
             writer.write("        SUBSCRIBER_INDEX.put(info.getSubscriberClass(), info);\n");
