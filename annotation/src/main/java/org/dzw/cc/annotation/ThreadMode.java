@@ -1,6 +1,6 @@
 package org.dzw.cc.annotation;
 
-public enum ProcessMode {
+public enum ThreadMode {
 
     POSTING,
 

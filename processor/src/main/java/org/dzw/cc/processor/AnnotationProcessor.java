@@ -1,7 +1,8 @@
 package org.dzw.cc.processor;
 
-import org.dzw.cc.annotation.ProcessMode;
 import org.dzw.cc.annotation.Sub;
+import org.dzw.cc.annotation.ThreadMode;
+import org.dzw.cc.processor.meta.SubscriberMethodInfo;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
@@ -46,7 +47,7 @@ public class AnnotationProcessor extends AbstractProcessor {
 
     private final Set<TypeElement> classesToSkip = new HashSet<>();
 
-    private final String index = "org.dzw.cc.processor.SubMethodInfoIndexs";
+    private final String index = "org.dzw.cc.processor.SubMethodInfoIndexs1";
 
     //org.greenrobot.eventbus.EventBusTestsIndex
 //    private final String index = "Indexs";
@@ -159,27 +160,47 @@ public class AnnotationProcessor extends AbstractProcessor {
             }
             writer.write("import java.util.Arrays;\n");
             writer.write("import java.util.HashMap;\n");
-            writer.write("import java.util.Map;\n\n");
+            writer.write("import java.util.Map;\n");
             writer.write("import java.util.List;\n\n");
+            writer.write("import org.dzw.cc.processor.meta.Indexs;\n");
+            writer.write("import org.dzw.cc.processor.meta.SimpleSubscriberInfo;\n");
+            writer.write("import org.dzw.cc.processor.meta.SubscriberMethodInfo;\n");
+            writer.write("import org.dzw.cc.processor.meta.SubscriberInfo;\n");
+            writer.write("import org.dzw.cc.processor.SubscriberMethod;\n\n");
 
             writer.write("public class " + clazz + " implements Indexs {\n");
-            writer.write("    private static final Map<String, List<SubMethodInfo>> SUBSCRIBER_INDEX;\n\n");
+            writer.write("    private static final Map<String, List<SubscriberMethodInfo>> SUBSCRIBER_INDEX_KEYS;\n\n");
+            writer.write("    private static final Map<Class<?>, SubscriberInfo> SUBSCRIBER_INDEX;\n\n");
             writer.write("    static {\n");
-            writer.write("        SUBSCRIBER_INDEX = new HashMap<String, List<SubMethodInfo>>();\n\n");
+            writer.write("        SUBSCRIBER_INDEX_KEYS = new HashMap<String, List<SubscriberMethodInfo>>();\n\n");
+            writer.write("        SUBSCRIBER_INDEX = new HashMap<Class<?>, SubscriberInfo>();\n\n");
             writeIndexLines(writer, myPackage);
             writer.write("    }\n\n");
             writer.write("    private static void putIndex(SubscriberInfo info) {\n");
             writer.write("        SUBSCRIBER_INDEX.put(info.getSubscriberClass(), info);\n");
             writer.write("    }\n\n");
+            writer.write("    private static void putIndex(String key,List<SubscriberMethodInfo> info) {\n");
+            writer.write("        SUBSCRIBER_INDEX_KEYS.put(key, info);\n");
+            writer.write("    }\n\n");
             writer.write("    @Override\n");
-            writer.write("    public List<SubMethodInfo> getSubMethodInfo(Class<?> subscriberClass) {\n");
-            writer.write("        List<SubMethodInfo> info = SUBSCRIBER_INDEX.get(subscriberClass);\n");
+            writer.write("    public SubscriberInfo getSubMethodInfo(Class<?> subscriberClass) {\n");
+            writer.write("        SubscriberInfo info = SUBSCRIBER_INDEX.get(subscriberClass);\n");
             writer.write("        if (info != null) {\n");
             writer.write("            return info;\n");
             writer.write("        } else {\n");
             writer.write("            return null;\n");
             writer.write("        }\n");
             writer.write("    }\n");
+            writer.write("    @Override\n");
+            writer.write("    public List<SubscriberMethodInfo> getSubMethodInfo(String key) {\n");
+            writer.write("        List<SubscriberMethodInfo> info = SUBSCRIBER_INDEX_KEYS.get(key);\n");
+            writer.write("        if (info != null || info.size()>0) {\n");
+            writer.write("            return info;\n");
+            writer.write("        } else {\n");
+            writer.write("            return null;\n");
+            writer.write("        }\n");
+            writer.write("    }\n");
+
             writer.write("}\n");
         } catch (IOException e) {
             throw new RuntimeException("Could not write source for " + index, e);
@@ -212,6 +233,10 @@ public class AnnotationProcessor extends AbstractProcessor {
             } else {
                 writer.write("        // Subscriber not visible to index: " + subscriberClass + "\n");
             }
+        }
+        for (String key : keyByMethod.keySet()) {
+            writeLine(writer, 2,
+                    "putIndex(\"" + key + "\",SUBSCRIBER_INDEX_KEYS.get(\""+key+"\"));");
         }
     }
 
@@ -264,7 +289,7 @@ public class AnnotationProcessor extends AbstractProcessor {
             parts.add(callPrefix + "(\"" + methodName + "\",");
             String lineEnd = "),";
             if (subscribe.priority() == 0 && !subscribe.sticky()) {
-                if (subscribe.processMode() == ProcessMode.POSTING) {
+                if (subscribe.processMode() == ThreadMode.POSTING) {
                     parts.add(eventClass + lineEnd);
                 } else {
                     parts.add(eventClass + ",");
