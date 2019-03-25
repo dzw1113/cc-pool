@@ -1,6 +1,9 @@
 package org.dzw.cc;
 
 import org.dzw.cc.annotation.Sub;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBusBuilder;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Objects;
 
@@ -28,6 +31,35 @@ public class Test {
 //        }
         System.out.println(msg);
         System.out.println("是");
+
+        String event = "Hello";
+
+        EventBusBuilder builder = EventBus.builder();
+        builder.ignoreGeneratedIndex(false);
+        EventBus eventBus = builder.installDefaultEventBus();
+//        System.out.println(EventBus.getDefault().equals(eventBus));
+
+        EventBus.builder()
+                .addIndex(new EventBusTestsIndex())
+                .build();
+
+
+        StringEventSubscriber stringEventSubscriber = new StringEventSubscriber();
+//        eventBus.register(stringEventSubscriber);
+        long start = System.currentTimeMillis();
+        long time = System.currentTimeMillis() - start;
+        eventBus.post(event);
+    }
+
+
+    public static class StringEventSubscriber {
+        public String lastStringEvent;
+
+        @Subscribe
+        public void onEvent(String event) {
+            lastStringEvent = event;
+            System.out.println("我收到消息了");
+        }
     }
 
 

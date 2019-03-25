@@ -77,32 +77,32 @@ public class MessageWorker {
     }
 
     public void send(String key, Object message) {
-        PostingThreadState postingState = currentPostingThreadState.get();
-        List<Object> eventQueue = postingState.eventQueue;
-        eventQueue.add(event);
-
-        if (!postingState.isPosting) {
-            postingState.isMainThread = isMainThread();
-            postingState.isPosting = true;
-            if (postingState.canceled) {
-                throw new EventBusException("Internal error. Abort state was not reset");
-            }
-            try {
-                while (!eventQueue.isEmpty()) {
-                    postSingleEvent(eventQueue.remove(0), postingState);
-                }
-            } finally {
-                postingState.isPosting = false;
-                postingState.isMainThread = false;
-            }
-        }
+//        PostingThreadState postingState = currentPostingThreadState.get();
+//        List<Object> eventQueue = postingState.eventQueue;
+//        eventQueue.add(event);
+//
+//        if (!postingState.isPosting) {
+//            postingState.isMainThread = isMainThread();
+//            postingState.isPosting = true;
+//            if (postingState.canceled) {
+//                throw new EventBusException("Internal error. Abort state was not reset");
+//            }
+//            try {
+//                while (!eventQueue.isEmpty()) {
+//                    postSingleEvent(eventQueue.remove(0), postingState);
+//                }
+//            } finally {
+//                postingState.isPosting = false;
+//                postingState.isMainThread = false;
+//            }
+//        }
     }
 
     final static class PostingThreadState {
         final List<Object> eventQueue = new ArrayList<>();
         boolean isPosting;
         boolean isMainThread;
-        Subscription subscription;
+//        Subscription subscription;
         Object event;
         boolean canceled;
     }
